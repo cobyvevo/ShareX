@@ -27,12 +27,10 @@ using ShareX.HelpersLib;
 using ShareX.MediaLib;
 using ShareX.ScreenCaptureLib.Properties;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -171,7 +169,7 @@ namespace ShareX.ScreenCaptureLib
 
                 lbAudioSourceList.Items.Clear();
                 if (devices != null)
-                {          
+                {
                     cbVideoSource.Items.AddRange(devices.VideoDevices.Select(x => new FFmpegCaptureDevice(x, $"dshow ({x})")).ToArray());
                     cbAudioSource.Items.AddRange(devices.AudioDevices.Select(x => new FFmpegCaptureDevice(x, $"dshow ({x})")).ToArray());
                     lbAudioSourceList.Items.AddRange(Options.FFmpeg.AudioSources.Where(x => (devices.AudioDevices.IndexOf(x) != -1)).ToArray());
@@ -268,61 +266,45 @@ namespace ShareX.ScreenCaptureLib
 
         private void UpdateLbAudioSourceRemoveButtonUI(bool updateVisibilityOnly = false)
         {
+            if (lbAudioSourceList.SelectedIndex == -1) { btnRemoveAudioSource.Visible = false; return; } // Guard clause for when no item is selected
 
-            if (lbAudioSourceList.SelectedIndex != -1)
-            {
+            Rectangle itemRect = lbAudioSourceList.GetItemRectangle(lbAudioSourceList.SelectedIndex);
 
-                Rectangle itemRect = lbAudioSourceList.GetItemRectangle(lbAudioSourceList.SelectedIndex);
+            if (itemRect.Y < 0 || itemRect.Y > lbAudioSourceList.Bounds.Height - 16) { btnRemoveAudioSource.Visible = false; return; } // Guard clause for if the selected item rect isnt visible currently
+            if (updateVisibilityOnly == true) return;
 
-                if (itemRect.Y < 0 || itemRect.Y > lbAudioSourceList.Bounds.Height - 16)
-                {
-                    // if the selected item isnt even on screen, dont bother trying to move the X button and just hide it
-                    btnRemoveAudioSource.Visible = false;
-                    return;
-                }
-
-                if (updateVisibilityOnly == true) return;
-
-                int desiredX = itemRect.X + itemRect.Width - btnRemoveAudioSource.Bounds.Width + 2;
-                int desiredY = itemRect.Y + 2;
-
-                Rectangle bound = btnRemoveAudioSource.Bounds;
-                bound.X = lbAudioSourceList.Bounds.X + desiredX;
-                bound.Y = lbAudioSourceList.Bounds.Y + desiredY;
-
-                btnRemoveAudioSource.Bounds = bound;
-
-                btnRemoveAudioSource.Visible = true;
-
-            }
-            else
-            {
-                btnRemoveAudioSource.Visible = false;
-            }
+            // Position for the rightmost edge of the selected item
+            int buttonOffsetX = itemRect.X + itemRect.Width - btnRemoveAudioSource.Bounds.Width + 2;
+            int buttonOffsetY = itemRect.Y + 2;
             
+            // itemRects position is based on the parent listbox position. The button is part of the form so we take the listbox position into account.
+            Rectangle finalBound = btnRemoveAudioSource.Bounds;
+            finalBound.X = lbAudioSourceList.Bounds.X + buttonOffsetX;
+            finalBound.Y = lbAudioSourceList.Bounds.Y + buttonOffsetY;
+
+            btnRemoveAudioSource.Bounds = finalBound;
+            btnRemoveAudioSource.Visible = true;
         }
 
         private void AddItemToAudioList(string deviceString)
         {
             int existingIndex = Options.FFmpeg.AudioSources.IndexOf(deviceString);
-            if (existingIndex != -1) return; // Do not add new audio source if its already in the list
+            if (existingIndex != -1) return; // Guard clause for if the deviceString is already in the list of AudioSources
 
             lbAudioSourceList.Items.Add(deviceString);
-
             Options.FFmpeg.AudioSources.Add(deviceString);
-            
+
             UpdateUI();
             UpdateLbAudioSourceRemoveButtonUI();
         }
 
         private void RemoveItemFromAudioList(int removeIndex)
         {
-            if (removeIndex == -1 || removeIndex >= lbAudioSourceList.Items.Count) return; // Return if the index is not within the list
+            if (removeIndex == -1 || removeIndex >= lbAudioSourceList.Items.Count) return; // Guard clause for if the index is not within the list
 
             string removeName = lbAudioSourceList.Items[removeIndex].ToString();
 
             lbAudioSourceList.Items.RemoveAt(removeIndex);
-
             Options.FFmpeg.AudioSources.Remove(removeName);
 
             UpdateUI();
@@ -331,7 +313,8 @@ namespace ShareX.ScreenCaptureLib
 
         private void cbAudioSource_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbAudioSource.SelectedIndex == 0) return; // Make sure we cant try to add the "Add..." text to the list of devices
+            if (cbAudioSource.SelectedIndex == 0) return; // Guard clause to make sure we cant try to add the "Add..." text to the list of devices
+
             FFmpegCaptureDevice device = cbAudioSource.SelectedItem as FFmpegCaptureDevice;
             AddItemToAudioList(device.Value);
             cbAudioSource.SelectedIndex = 0; // Set combobox back to displaying "Add..."
@@ -339,31 +322,31 @@ namespace ShareX.ScreenCaptureLib
 
         private void lbAudioSourceList_DrawItem(object sender, DrawItemEventArgs e)
         {
-            UpdateLbAudioSourceRemoveButtonUI(e.Index != lbAudioSourceList.SelectedIndex); // Only update button position if we are drawing the selected item
+            UpdateLbAudioSourceRemoveButtonUI(e.Index != lbAudioSourceList.SelectedIndex); // Only update X button position if we are drawing the selected item
 
-            if (e.Index == -1) return;
+            if (e.Index == -1) return; // Guard clause incase the listbox attempts to draw an item with a -1 index when its empty
+
             e.DrawBackground();
+            string itemText = lbAudioSourceList.Items[e.Index].ToString().Truncate(48,"...");
+   
+            using (SolidBrush textBrush = new SolidBrush(e.ForeColor))
+                e.Graphics.DrawString(itemText, e.Font, textBrush, e.Bounds, StringFormat.GenericDefault);
 
-            string itemText = lbAudioSourceList.Items[e.Index].ToString();
-            if (itemText.Length > 48) itemText = itemText.Substring(0, 48) + "..."; // Cut off string if its longer than 48 chars
-
-            e.Graphics.DrawString(itemText,e.Font, Brushes.White, e.Bounds, StringFormat.GenericDefault);
         }
-
-        private void lbAudioSourceList_Click(object sender, EventArgs e)
+        private void lbAudioSourceList_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateLbAudioSourceRemoveButtonUI();
         }
-
         private void lbAudioSourceList_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode != Keys.Delete) return;
+            if (e.KeyCode == Keys.Delete)
+            {
+                int indexToRemove = Math.Max(lbAudioSourceList.SelectedIndex, 0); // This will remove either selected index, or the topmost item from the list
+                RemoveItemFromAudioList(indexToRemove);
 
-            int indexToRemove = Math.Max(lbAudioSourceList.SelectedIndex, 0); // This will remove either selected index, or the topmost item from the list
-            RemoveItemFromAudioList(indexToRemove);
-
-            if (lbAudioSourceList.Items.Count > 0)
-                lbAudioSourceList.SelectedIndex = indexToRemove - 1;
+                if (lbAudioSourceList.Items.Count > 0)
+                    lbAudioSourceList.SelectedIndex = indexToRemove - 1;
+            }
         }
 
         private void btnRemoveAudioSource_Click(object sender, EventArgs e)

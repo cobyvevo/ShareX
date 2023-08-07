@@ -815,8 +815,8 @@
             this.lbAudioSourceList.FormattingEnabled = true;
             resources.ApplyResources(this.lbAudioSourceList, "lbAudioSourceList");
             this.lbAudioSourceList.Name = "lbAudioSourceList";
-            this.lbAudioSourceList.Click += new System.EventHandler(this.lbAudioSourceList_Click);
             this.lbAudioSourceList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbAudioSourceList_DrawItem);
+            this.lbAudioSourceList.SelectedIndexChanged += new System.EventHandler(this.lbAudioSourceList_SelectedIndexChanged);
             this.lbAudioSourceList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbAudioSourceList_KeyDown);
             // 
             // FFmpegOptionsForm

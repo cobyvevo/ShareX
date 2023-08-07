@@ -335,16 +335,15 @@ namespace ShareX.ScreenCaptureLib
 
         private void AppendExtraAudioDevices(StringBuilder args, string inputDevice)
         {
-            if (FFmpeg.AudioSources.Count <= 1) return; // Dont bother adding extra audio sources if there are no extra audio sources
+            if (FFmpeg.AudioSources.Count <= 1) return; // Guard cause for not bothering adding extra audio sources if there are no extra audio sources to add
 
-            for (int i = 1; i < FFmpeg.AudioSources.Count; i++) // The zeroth audio source is considered the main audio source, which is assumed already added along with the video source argument, so we start at 1
+            for (int i = 1; i < FFmpeg.AudioSources.Count; i++) // The zeroth audio source is assumed already added along with the video source argument, so its skipped.
             {
                 string source = FFmpeg.AudioSources[i];
                 args.Append($"-f {inputDevice} ");
                 args.Append("-thread_queue_size 1024 ");
                 args.Append("-audio_buffer_size 80 ");
                 args.Append($"-i audio={Helpers.EscapeCLIText(source)} ");
-
             }
 
             args.Append($"-filter_complex amix=inputs={FFmpeg.AudioSources.Count}:duration=longest "); // https://ffmpeg.org/ffmpeg-filters.html#amix
