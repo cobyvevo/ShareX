@@ -34,7 +34,6 @@ namespace ShareX.ScreenCaptureLib
         public bool OverrideCLIPath { get; set; } = false;
         public string CLIPath { get; set; } = "";
         public string VideoSource { get; set; } = FFmpegCaptureDevice.GDIGrab.Value;
-        public string AudioSource { get; set; } = FFmpegCaptureDevice.None.Value;
         public List<string> AudioSources { get; set; } = new List<string>();
 
         public FFmpegVideoCodec VideoCodec { get; set; } = FFmpegVideoCodec.libx264;
@@ -110,7 +109,7 @@ namespace ShareX.ScreenCaptureLib
                             return "apng";
                     }
                 }
-                else if (!string.IsNullOrEmpty(AudioSource))
+                else if (AudioSources.Count != 0)
                 {
                     switch (AudioCodec)
                     {
@@ -133,7 +132,7 @@ namespace ShareX.ScreenCaptureLib
 
         public bool IsVideoSourceSelected => !string.IsNullOrEmpty(VideoSource);
 
-        public bool IsAudioSourceSelected => !string.IsNullOrEmpty(AudioSource) && (!IsVideoSourceSelected || !IsAnimatedImage);
+        public bool IsAudioSourceSelected => (AudioSources.Count != 0) && (!IsVideoSourceSelected || !IsAnimatedImage);
 
         public bool IsAnimatedImage => VideoCodec == FFmpegVideoCodec.gif || VideoCodec == FFmpegVideoCodec.libwebp || VideoCodec == FFmpegVideoCodec.apng;
 

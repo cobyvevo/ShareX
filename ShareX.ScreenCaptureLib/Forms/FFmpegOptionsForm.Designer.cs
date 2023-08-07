@@ -43,6 +43,8 @@
             this.pbx264PresetWarning = new System.Windows.Forms.PictureBox();
             this.tbOpusBitrate = new System.Windows.Forms.TrackBar();
             this.nudGIFBayerScale = new System.Windows.Forms.NumericUpDown();
+            this.cbAudioSource = new System.Windows.Forms.ComboBox();
+            this.btnRemoveAudioSource = new System.Windows.Forms.Button();
             this.cbVideoCodec = new System.Windows.Forms.ComboBox();
             this.lblx264Preset = new System.Windows.Forms.Label();
             this.lblXvidQscale = new System.Windows.Forms.Label();
@@ -95,7 +97,6 @@
             this.lblMP3Quality = new System.Windows.Forms.Label();
             this.cbVideoSource = new System.Windows.Forms.ComboBox();
             this.lblVideoSource = new System.Windows.Forms.Label();
-            this.cbAudioSource = new System.Windows.Forms.ComboBox();
             this.lblAudioSource = new System.Windows.Forms.Label();
             this.cbAudioCodec = new System.Windows.Forms.ComboBox();
             this.btnHelperDevicesHelp = new System.Windows.Forms.Button();
@@ -107,7 +108,6 @@
             this.lblVideoEncoder = new System.Windows.Forms.Label();
             this.lblAudioEncoder = new System.Windows.Forms.Label();
             this.lbAudioSourceList = new System.Windows.Forms.ListBox();
-            this.btnRemoveAudioSource = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudx264CRF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudXvidQscale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbVorbis_qscale)).BeginInit();
@@ -286,6 +286,25 @@
             0,
             0});
             this.nudGIFBayerScale.ValueChanged += new System.EventHandler(this.nudGIFBayerScale_SelectedIndexChanged);
+            // 
+            // cbAudioSource
+            // 
+            this.cbAudioSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAudioSource.FormattingEnabled = true;
+            resources.ApplyResources(this.cbAudioSource, "cbAudioSource");
+            this.cbAudioSource.Name = "cbAudioSource";
+            this.ttHelpTip.SetToolTip(this.cbAudioSource, resources.GetString("cbAudioSource.ToolTip"));
+            this.cbAudioSource.SelectedIndexChanged += new System.EventHandler(this.cbAudioSource_SelectedIndexChanged);
+            // 
+            // btnRemoveAudioSource
+            // 
+            this.btnRemoveAudioSource.BackgroundImage = global::ShareX.ScreenCaptureLib.Properties.Resources.cross;
+            resources.ApplyResources(this.btnRemoveAudioSource, "btnRemoveAudioSource");
+            this.btnRemoveAudioSource.FlatAppearance.BorderSize = 0;
+            this.btnRemoveAudioSource.Name = "btnRemoveAudioSource";
+            this.ttHelpTip.SetToolTip(this.btnRemoveAudioSource, resources.GetString("btnRemoveAudioSource.ToolTip"));
+            this.btnRemoveAudioSource.UseVisualStyleBackColor = true;
+            this.btnRemoveAudioSource.Click += new System.EventHandler(this.btnRemoveAudioSource_Click);
             // 
             // cbVideoCodec
             // 
@@ -731,14 +750,6 @@
             resources.ApplyResources(this.lblVideoSource, "lblVideoSource");
             this.lblVideoSource.Name = "lblVideoSource";
             // 
-            // cbAudioSource
-            // 
-            this.cbAudioSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAudioSource.FormattingEnabled = true;
-            resources.ApplyResources(this.cbAudioSource, "cbAudioSource");
-            this.cbAudioSource.Name = "cbAudioSource";
-            this.cbAudioSource.SelectedIndexChanged += new System.EventHandler(this.cbAudioSource_SelectedIndexChanged);
-            // 
             // lblAudioSource
             // 
             resources.ApplyResources(this.lblAudioSource, "lblAudioSource");
@@ -807,15 +818,6 @@
             this.lbAudioSourceList.Click += new System.EventHandler(this.lbAudioSourceList_Click);
             this.lbAudioSourceList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbAudioSourceList_DrawItem);
             this.lbAudioSourceList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbAudioSourceList_KeyDown);
-            // 
-            // btnRemoveAudioSource
-            // 
-            this.btnRemoveAudioSource.BackgroundImage = global::ShareX.ScreenCaptureLib.Properties.Resources.cross;
-            resources.ApplyResources(this.btnRemoveAudioSource, "btnRemoveAudioSource");
-            this.btnRemoveAudioSource.FlatAppearance.BorderSize = 0;
-            this.btnRemoveAudioSource.Name = "btnRemoveAudioSource";
-            this.btnRemoveAudioSource.UseVisualStyleBackColor = true;
-            this.btnRemoveAudioSource.Click += new System.EventHandler(this.btnRemoveAudioSource_Click);
             // 
             // FFmpegOptionsForm
             // 

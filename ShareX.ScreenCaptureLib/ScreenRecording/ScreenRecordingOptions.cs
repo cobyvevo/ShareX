@@ -120,7 +120,7 @@ namespace ShareX.ScreenCaptureLib
                         if (FFmpeg.IsAudioSourceSelected)
                         {
                             AppendInputDevice(args, "dshow", true);
-                            args.Append($"-i audio={Helpers.EscapeCLIText(FFmpeg.AudioSource)} "); // FFmpeg.AudioSource
+                            args.Append($"-i audio={Helpers.EscapeCLIText(FFmpeg.AudioSources[0])} ");
                             AppendExtraAudioDevices(args, "dshow");
                         }
                     }
@@ -173,7 +173,7 @@ namespace ShareX.ScreenCaptureLib
                         if (FFmpeg.IsAudioSourceSelected)
                         {
                             AppendInputDevice(args, "dshow", true);
-                            args.Append($"-i audio={Helpers.EscapeCLIText(FFmpeg.AudioSource)} ");
+                            args.Append($"-i audio={Helpers.EscapeCLIText(FFmpeg.AudioSources[0])} ");
                             AppendExtraAudioDevices(args, "dshow");
                         }
                     }
@@ -186,7 +186,7 @@ namespace ShareX.ScreenCaptureLib
 
                         if (FFmpeg.IsAudioSourceSelected)
                         {
-                            args.Append($":audio={Helpers.EscapeCLIText(FFmpeg.AudioSource)} ");
+                            args.Append($":audio={Helpers.EscapeCLIText(FFmpeg.AudioSources[0])} ");
                             AppendExtraAudioDevices(args, "dshow");
                         }
                         else
@@ -198,7 +198,7 @@ namespace ShareX.ScreenCaptureLib
                 else if (FFmpeg.IsAudioSourceSelected)
                 {
                     AppendInputDevice(args, "dshow", true);
-                    args.Append($"-i audio={Helpers.EscapeCLIText(FFmpeg.AudioSource)} ");
+                    args.Append($"-i audio={Helpers.EscapeCLIText(FFmpeg.AudioSources[0])} ");
                     AppendExtraAudioDevices(args, "dshow");
                 }
             }

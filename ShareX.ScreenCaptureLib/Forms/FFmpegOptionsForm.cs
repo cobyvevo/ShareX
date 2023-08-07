@@ -209,8 +209,6 @@ namespace ShareX.ScreenCaptureLib
                 //  This should also be implemented right before beginning a recording, since right now,
                 //  making a device unavailable by unplugging it or something and then immediately recording your screen will throw an error from FFmpeg
                 Options.FFmpeg.AudioSources = Options.FFmpeg.AudioSources.Where(x => (lbAudioSourceList.Items.IndexOf(x) != -1)).ToList();
-                Options.FFmpeg.AudioSource = ((Options.FFmpeg.AudioSources.Count > 0) ? Options.FFmpeg.AudioSources[0] : FFmpegCaptureDevice.None.Value); // Set zeroth audiosource as the main audio source + Set to none if sources is empty
-
             }
         }
 
@@ -312,8 +310,7 @@ namespace ShareX.ScreenCaptureLib
             lbAudioSourceList.Items.Add(deviceString);
 
             Options.FFmpeg.AudioSources.Add(deviceString);
-            Options.FFmpeg.AudioSource = Options.FFmpeg.AudioSources[0]; // Set zeroth audiosource as the main audio source
-
+            
             UpdateUI();
             UpdateLbAudioSourceRemoveButtonUI();
         }
@@ -327,7 +324,6 @@ namespace ShareX.ScreenCaptureLib
             lbAudioSourceList.Items.RemoveAt(removeIndex);
 
             Options.FFmpeg.AudioSources.Remove(removeName);
-            Options.FFmpeg.AudioSource = ((Options.FFmpeg.AudioSources.Count > 0) ? Options.FFmpeg.AudioSources[0] : FFmpegCaptureDevice.None.Value); // Set zeroth audiosource as the main audio source + Set to none if sources is empty
 
             UpdateUI();
             UpdateLbAudioSourceRemoveButtonUI();
@@ -347,7 +343,11 @@ namespace ShareX.ScreenCaptureLib
 
             if (e.Index == -1) return;
             e.DrawBackground();
-            e.Graphics.DrawString(lbAudioSourceList.Items[e.Index].ToString(),e.Font, Brushes.White, e.Bounds, StringFormat.GenericDefault);
+
+            string itemText = lbAudioSourceList.Items[e.Index].ToString();
+            if (itemText.Length > 48) itemText = itemText.Substring(0, 48) + "..."; // Cut off string if its longer than 48 chars
+
+            e.Graphics.DrawString(itemText,e.Font, Brushes.White, e.Bounds, StringFormat.GenericDefault);
         }
 
         private void lbAudioSourceList_Click(object sender, EventArgs e)
