@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using ShareX.HelpersLib;
+using System.Collections.Generic;
 
 namespace ShareX.ScreenCaptureLib
 {
@@ -34,6 +35,8 @@ namespace ShareX.ScreenCaptureLib
         public string CLIPath { get; set; } = "";
         public string VideoSource { get; set; } = FFmpegCaptureDevice.GDIGrab.Value;
         public string AudioSource { get; set; } = FFmpegCaptureDevice.None.Value;
+        public List<string> AudioSources { get; set; } = new List<string>();
+
         public FFmpegVideoCodec VideoCodec { get; set; } = FFmpegVideoCodec.libx264;
         public FFmpegAudioCodec AudioCodec { get; set; } = FFmpegAudioCodec.libvoaacenc;
         public string UserArgs { get; set; } = "";

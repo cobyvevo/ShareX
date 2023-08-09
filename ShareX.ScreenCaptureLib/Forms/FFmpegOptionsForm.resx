@@ -458,7 +458,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>0</value>
   </data>
   <data name="cbVideoCodec.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 160</value>
+    <value>16, 206</value>
   </data>
   <data name="cbVideoCodec.Size" type="System.Drawing.Size, System.Drawing">
     <value>312, 21</value>
@@ -476,7 +476,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbVideoCodec.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>3</value>
   </data>
   <data name="lblx264Preset.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -536,7 +536,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>NoControl</value>
   </data>
   <data name="btnFFmpegBrowse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>616, 30</value>
+    <value>616, 33</value>
   </data>
   <data name="btnFFmpegBrowse.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 24</value>
@@ -557,13 +557,13 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnFFmpegBrowse.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>21</value>
   </data>
   <data name="txtFFmpegPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 32</value>
+    <value>16, 33</value>
   </data>
   <data name="txtFFmpegPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 20</value>
+    <value>588, 20</value>
   </data>
   <data name="txtFFmpegPath.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -578,13 +578,13 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtFFmpegPath.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>22</value>
   </data>
   <data name="cbCustomCommands.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="cbCustomCommands.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 317</value>
+    <value>260, 370</value>
   </data>
   <data name="cbCustomCommands.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 17</value>
@@ -605,13 +605,13 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbCustomCommands.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>13</value>
   </data>
   <data name="txtCommandLinePreview.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="txtCommandLinePreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 336</value>
+    <value>16, 390</value>
   </data>
   <data name="txtCommandLinePreview.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -635,10 +635,10 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtCommandLinePreview.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>15</value>
   </data>
   <data name="txtUserArgs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 288</value>
+    <value>16, 342</value>
   </data>
   <data name="txtUserArgs.Size" type="System.Drawing.Size, System.Drawing">
     <value>632, 20</value>
@@ -656,7 +656,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtUserArgs.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;tpX264.Name" xml:space="preserve">
     <value>tpX264</value>
@@ -743,10 +743,10 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>6</value>
   </data>
   <data name="tcFFmpegVideoCodecs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 184</value>
+    <value>16, 233</value>
   </data>
   <data name="tcFFmpegVideoCodecs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 80</value>
+    <value>312, 89</value>
   </data>
   <data name="tcFFmpegVideoCodecs.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -761,7 +761,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tcFFmpegVideoCodecs.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;lblx264BitrateK.Name" xml:space="preserve">
     <value>lblx264BitrateK</value>
@@ -806,7 +806,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpX264.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 36</value>
+    <value>304, 45</value>
   </data>
   <data name="tpX264.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -944,7 +944,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>4, 40</value>
   </data>
   <data name="tpVpx.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 124</value>
+    <value>304, 45</value>
   </data>
   <data name="tpVpx.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1049,7 +1049,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>4, 40</value>
   </data>
   <data name="tpXvid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 124</value>
+    <value>304, 45</value>
   </data>
   <data name="tpXvid.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1136,7 +1136,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpNVENC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 124</value>
+    <value>304, 45</value>
   </data>
   <data name="tpNVENC.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1187,7 +1187,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>72, 28</value>
   </data>
   <data name="cbNVENCPreset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 21</value>
+    <value>213, 21</value>
   </data>
   <data name="cbNVENCPreset.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1313,7 +1313,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpGIF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 124</value>
+    <value>304, 45</value>
   </data>
   <data name="tpGIF.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1481,7 +1481,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpAMF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 124</value>
+    <value>304, 45</value>
   </data>
   <data name="tpAMF.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1640,7 +1640,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>72, 28</value>
   </data>
   <data name="cbAMFUsage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 21</value>
+    <value>216, 21</value>
   </data>
   <data name="cbAMFUsage.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1754,7 +1754,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpQSV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 124</value>
+    <value>304, 45</value>
   </data>
   <data name="tpQSV.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1805,7 +1805,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>72, 28</value>
   </data>
   <data name="cbQSVPreset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 21</value>
+    <value>213, 21</value>
   </data>
   <data name="cbQSVPreset.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1955,10 +1955,10 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>3</value>
   </data>
   <data name="tcFFmpegAudioCodecs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>336, 184</value>
+    <value>337, 233</value>
   </data>
   <data name="tcFFmpegAudioCodecs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 80</value>
+    <value>311, 89</value>
   </data>
   <data name="tcFFmpegAudioCodecs.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -1973,7 +1973,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tcFFmpegAudioCodecs.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;lblAACQuality.Name" xml:space="preserve">
     <value>lblAACQuality</value>
@@ -1994,7 +1994,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpAAC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 54</value>
+    <value>303, 63</value>
   </data>
   <data name="tpAAC.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2060,7 +2060,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpOpus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 54</value>
+    <value>303, 63</value>
   </data>
   <data name="tpOpus.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2129,7 +2129,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpVorbis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 54</value>
+    <value>303, 63</value>
   </data>
   <data name="tpVorbis.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2195,7 +2195,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpMP3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 54</value>
+    <value>303, 63</value>
   </data>
   <data name="tpMP3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2243,7 +2243,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>1</value>
   </data>
   <data name="cbVideoSource.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 80</value>
+    <value>16, 77</value>
   </data>
   <data name="cbVideoSource.Size" type="System.Drawing.Size, System.Drawing">
     <value>312, 21</value>
@@ -2261,13 +2261,13 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbVideoSource.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>9</value>
   </data>
   <data name="lblVideoSource.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblVideoSource.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 64</value>
+    <value>16, 61</value>
   </data>
   <data name="lblVideoSource.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 13</value>
@@ -2288,10 +2288,10 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblVideoSource.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>2</value>
   </data>
   <data name="cbAudioSource.Location" type="System.Drawing.Point, System.Drawing">
-    <value>336, 80</value>
+    <value>336, 77</value>
   </data>
   <data name="cbAudioSource.Size" type="System.Drawing.Size, System.Drawing">
     <value>312, 21</value>
@@ -2309,22 +2309,22 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbAudioSource.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>8</value>
   </data>
   <data name="lblAudioSource.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblAudioSource.Location" type="System.Drawing.Point, System.Drawing">
-    <value>333, 64</value>
+    <value>334, 61</value>
   </data>
   <data name="lblAudioSource.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 13</value>
+    <value>77, 13</value>
   </data>
   <data name="lblAudioSource.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="lblAudioSource.Text" xml:space="preserve">
-    <value>Audio source:</value>
+    <value>Audio sources:</value>
   </data>
   <data name="&gt;&gt;lblAudioSource.Name" xml:space="preserve">
     <value>lblAudioSource</value>
@@ -2336,13 +2336,13 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblAudioSource.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>5</value>
   </data>
   <data name="cbAudioCodec.Location" type="System.Drawing.Point, System.Drawing">
-    <value>336, 160</value>
+    <value>337, 206</value>
   </data>
   <data name="cbAudioCodec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 21</value>
+    <value>311, 21</value>
   </data>
   <data name="cbAudioCodec.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -2360,7 +2360,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>11</value>
   </data>
   <data name="btnHelperDevicesHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>184, 112</value>
+    <value>173, 155</value>
   </data>
   <data name="btnHelperDevicesHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
@@ -2381,13 +2381,13 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnHelperDevicesHelp.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>18</value>
   </data>
   <data name="lblHelperDevices.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblHelperDevices.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 117</value>
+    <value>203, 161</value>
   </data>
   <data name="lblHelperDevices.Size" type="System.Drawing.Size, System.Drawing">
     <value>396, 13</value>
@@ -2408,13 +2408,13 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblHelperDevices.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>19</value>
   </data>
   <data name="btnInstallHelperDevices.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 112</value>
+    <value>16, 155</value>
   </data>
   <data name="btnInstallHelperDevices.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 24</value>
+    <value>151, 24</value>
   </data>
   <data name="btnInstallHelperDevices.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2432,13 +2432,13 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnInstallHelperDevices.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>20</value>
   </data>
   <data name="lblCommandLineArgs.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblCommandLineArgs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 272</value>
+    <value>13, 326</value>
   </data>
   <data name="lblCommandLineArgs.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 13</value>
@@ -2459,13 +2459,13 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblCommandLineArgs.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>17</value>
   </data>
   <data name="lblCommandLinePreview.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblCommandLinePreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 320</value>
+    <value>13, 374</value>
   </data>
   <data name="lblCommandLinePreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 13</value>
@@ -2486,13 +2486,13 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblCommandLinePreview.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>14</value>
   </data>
   <data name="cbUseCustomFFmpegPath.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="cbUseCustomFFmpegPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 13</value>
+    <value>19, 12</value>
   </data>
   <data name="cbUseCustomFFmpegPath.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 17</value>
@@ -2513,13 +2513,13 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbUseCustomFFmpegPath.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>12</value>
   </data>
   <data name="lblVideoEncoder.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblVideoEncoder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 144</value>
+    <value>13, 190</value>
   </data>
   <data name="lblVideoEncoder.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 13</value>
@@ -2540,13 +2540,13 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblVideoEncoder.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>7</value>
   </data>
   <data name="lblAudioEncoder.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblAudioEncoder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>333, 144</value>
+    <value>334, 190</value>
   </data>
   <data name="lblAudioEncoder.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 13</value>
@@ -2567,7 +2567,61 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblAudioEncoder.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
+  </data>
+  <data name="lbAudioSourceList.ItemHeight" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="lbAudioSourceList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 97</value>
+  </data>
+  <data name="lbAudioSourceList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>312, 52</value>
+  </data>
+  <data name="lbAudioSourceList.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;lbAudioSourceList.Name" xml:space="preserve">
+    <value>lbAudioSourceList</value>
+  </data>
+  <data name="&gt;&gt;lbAudioSourceList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbAudioSourceList.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lbAudioSourceList.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnRemoveAudioSource.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="btnRemoveAudioSource.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnRemoveAudioSource.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnRemoveAudioSource.Location" type="System.Drawing.Point, System.Drawing">
+    <value>628, 104</value>
+  </data>
+  <data name="btnRemoveAudioSource.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="btnRemoveAudioSource.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;btnRemoveAudioSource.Name" xml:space="preserve">
+    <value>btnRemoveAudioSource</value>
+  </data>
+  <data name="&gt;&gt;btnRemoveAudioSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnRemoveAudioSource.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnRemoveAudioSource.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2579,7 +2633,7 @@ Otherwise it can't keep up with recording and a lot of frame drops will happen.<
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>664, 424</value>
+    <value>664, 474</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

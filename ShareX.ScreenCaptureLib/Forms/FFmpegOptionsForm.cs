@@ -27,9 +27,12 @@ using ShareX.HelpersLib;
 using ShareX.MediaLib;
 using ShareX.ScreenCaptureLib.Properties;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -40,9 +43,10 @@ namespace ShareX.ScreenCaptureLib
         public ScreenRecordingOptions Options { get; private set; }
 
         private bool settingsLoaded;
-
+        private static FFmpegCaptureDevice AddFFmpegCaptureDeviceVisual { get; } = new FFmpegCaptureDevice("", "Add..."); // Purely visual FFmpeg device for displaying "Add..." instead of "None".
         public FFmpegOptionsForm(ScreenRecordingOptions options)
         {
+
             Options = options;
 
             InitializeComponent();
@@ -57,6 +61,9 @@ namespace ShareX.ScreenCaptureLib
             cbAMFUsage.Items.AddRange(Helpers.GetEnums<FFmpegAMFUsage>().Select(x => $"{x} ({x.GetDescription()})").ToArray());
             cbAMFQuality.Items.AddRange(Helpers.GetEnums<FFmpegAMFQuality>().Select(x => $"{x} ({x.GetDescription()})").ToArray());
             cbQSVPreset.Items.AddRange(Helpers.GetEnumDescriptions<FFmpegQSVPreset>());
+
+            btnRemoveAudioSource.Visible = false;
+
         }
 
         private async Task SettingsLoad()
@@ -149,6 +156,7 @@ namespace ShareX.ScreenCaptureLib
 
             if (!IsDisposed)
             {
+
                 cbVideoSource.Items.Clear();
                 cbVideoSource.Items.Add(FFmpegCaptureDevice.None);
                 cbVideoSource.Items.Add(FFmpegCaptureDevice.GDIGrab);
@@ -159,12 +167,14 @@ namespace ShareX.ScreenCaptureLib
                 }
 
                 cbAudioSource.Items.Clear();
-                cbAudioSource.Items.Add(FFmpegCaptureDevice.None);
+                cbAudioSource.Items.Add(AddFFmpegCaptureDeviceVisual);
 
+                lbAudioSourceList.Items.Clear();
                 if (devices != null)
-                {
+                {          
                     cbVideoSource.Items.AddRange(devices.VideoDevices.Select(x => new FFmpegCaptureDevice(x, $"dshow ({x})")).ToArray());
                     cbAudioSource.Items.AddRange(devices.AudioDevices.Select(x => new FFmpegCaptureDevice(x, $"dshow ({x})")).ToArray());
+                    lbAudioSourceList.Items.AddRange(Options.FFmpeg.AudioSources.Where(x => (devices.AudioDevices.IndexOf(x) != -1)).ToArray());
                 }
 
                 if (selectDevices && cbVideoSource.Items.Cast<FFmpegCaptureDevice>().
@@ -187,23 +197,20 @@ namespace ShareX.ScreenCaptureLib
                 }
 
                 if (selectDevices && cbAudioSource.Items.Cast<FFmpegCaptureDevice>().
-                    Any(x => x.Value.Equals(FFmpegCaptureDevice.VirtualAudioCapturer.Value, StringComparison.OrdinalIgnoreCase)))
+                   Any(x => x.Value.Equals(FFmpegCaptureDevice.VirtualAudioCapturer.Value, StringComparison.OrdinalIgnoreCase)))
                 {
-                    Options.FFmpeg.AudioSource = FFmpegCaptureDevice.VirtualAudioCapturer.Value;
-                }
-                else if (!cbAudioSource.Items.Cast<FFmpegCaptureDevice>().Any(x => x.Value.Equals(Options.FFmpeg.AudioSource, StringComparison.OrdinalIgnoreCase)))
-                {
-                    Options.FFmpeg.AudioSource = FFmpegCaptureDevice.None.Value;
+                    AddItemToAudioList(FFmpegCaptureDevice.VirtualAudioCapturer.Value);
                 }
 
-                foreach (FFmpegCaptureDevice device in cbAudioSource.Items)
-                {
-                    if (device.Value.Equals(Options.FFmpeg.AudioSource, StringComparison.OrdinalIgnoreCase))
-                    {
-                        cbAudioSource.SelectedItem = device;
-                        break;
-                    }
-                }
+                //Set audio combobox to say "Add..."
+                cbAudioSource.SelectedIndex = 0;
+
+                //Remove all audio FFmpegCaptureDevices that have not been detected --
+                //  This should also be implemented right before beginning a recording, since right now,
+                //  making a device unavailable by unplugging it or something and then immediately recording your screen will throw an error from FFmpeg
+                Options.FFmpeg.AudioSources = Options.FFmpeg.AudioSources.Where(x => (lbAudioSourceList.Items.IndexOf(x) != -1)).ToList();
+                Options.FFmpeg.AudioSource = ((Options.FFmpeg.AudioSources.Count > 0) ? Options.FFmpeg.AudioSources[0] : FFmpegCaptureDevice.None.Value); // Set zeroth audiosource as the main audio source + Set to none if sources is empty
+
             }
         }
 
@@ -261,11 +268,107 @@ namespace ShareX.ScreenCaptureLib
             UpdateUI();
         }
 
+        private void UpdateLbAudioSourceRemoveButtonUI(bool updateVisibilityOnly = false)
+        {
+
+            if (lbAudioSourceList.SelectedIndex != -1)
+            {
+
+                Rectangle itemRect = lbAudioSourceList.GetItemRectangle(lbAudioSourceList.SelectedIndex);
+
+                if (itemRect.Y < 0 || itemRect.Y > lbAudioSourceList.Bounds.Height - 16)
+                {
+                    // if the selected item isnt even on screen, dont bother trying to move the X button and just hide it
+                    btnRemoveAudioSource.Visible = false;
+                    return;
+                }
+
+                if (updateVisibilityOnly == true) return;
+
+                int desiredX = itemRect.X + itemRect.Width - btnRemoveAudioSource.Bounds.Width + 2;
+                int desiredY = itemRect.Y + 2;
+
+                Rectangle bound = btnRemoveAudioSource.Bounds;
+                bound.X = lbAudioSourceList.Bounds.X + desiredX;
+                bound.Y = lbAudioSourceList.Bounds.Y + desiredY;
+
+                btnRemoveAudioSource.Bounds = bound;
+
+                btnRemoveAudioSource.Visible = true;
+
+            }
+            else
+            {
+                btnRemoveAudioSource.Visible = false;
+            }
+            
+        }
+
+        private void AddItemToAudioList(string deviceString)
+        {
+            int existingIndex = Options.FFmpeg.AudioSources.IndexOf(deviceString);
+            if (existingIndex != -1) return; // Do not add new audio source if its already in the list
+
+            lbAudioSourceList.Items.Add(deviceString);
+
+            Options.FFmpeg.AudioSources.Add(deviceString);
+            Options.FFmpeg.AudioSource = Options.FFmpeg.AudioSources[0]; // Set zeroth audiosource as the main audio source
+
+            UpdateUI();
+            UpdateLbAudioSourceRemoveButtonUI();
+        }
+
+        private void RemoveItemFromAudioList(int removeIndex)
+        {
+            if (removeIndex == -1 || removeIndex >= lbAudioSourceList.Items.Count) return; // Return if the index is not within the list
+
+            string removeName = lbAudioSourceList.Items[removeIndex].ToString();
+
+            lbAudioSourceList.Items.RemoveAt(removeIndex);
+
+            Options.FFmpeg.AudioSources.Remove(removeName);
+            Options.FFmpeg.AudioSource = ((Options.FFmpeg.AudioSources.Count > 0) ? Options.FFmpeg.AudioSources[0] : FFmpegCaptureDevice.None.Value); // Set zeroth audiosource as the main audio source + Set to none if sources is empty
+
+            UpdateUI();
+            UpdateLbAudioSourceRemoveButtonUI();
+        }
+
         private void cbAudioSource_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cbAudioSource.SelectedIndex == 0) return; // Make sure we cant try to add the "Add..." text to the list of devices
             FFmpegCaptureDevice device = cbAudioSource.SelectedItem as FFmpegCaptureDevice;
-            Options.FFmpeg.AudioSource = device?.Value;
-            UpdateUI();
+            AddItemToAudioList(device.Value);
+            cbAudioSource.SelectedIndex = 0; // Set combobox back to displaying "Add..."
+        }
+
+        private void lbAudioSourceList_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            UpdateLbAudioSourceRemoveButtonUI(e.Index != lbAudioSourceList.SelectedIndex); // Only update button position if we are drawing the selected item
+
+            if (e.Index == -1) return;
+            e.DrawBackground();
+            e.Graphics.DrawString(lbAudioSourceList.Items[e.Index].ToString(),e.Font, Brushes.White, e.Bounds, StringFormat.GenericDefault);
+        }
+
+        private void lbAudioSourceList_Click(object sender, EventArgs e)
+        {
+            UpdateLbAudioSourceRemoveButtonUI();
+        }
+
+        private void lbAudioSourceList_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Delete) return;
+
+            int indexToRemove = Math.Max(lbAudioSourceList.SelectedIndex, 0); // This will remove either selected index, or the topmost item from the list
+            RemoveItemFromAudioList(indexToRemove);
+
+            if (lbAudioSourceList.Items.Count > 0)
+                lbAudioSourceList.SelectedIndex = indexToRemove - 1;
+        }
+
+        private void btnRemoveAudioSource_Click(object sender, EventArgs e)
+        {
+            RemoveItemFromAudioList(lbAudioSourceList.SelectedIndex);
         }
 
         private async void btnInstallHelperDevices_Click(object sender, EventArgs e)
@@ -527,5 +630,6 @@ namespace ShareX.ScreenCaptureLib
         {
             Options.FFmpeg.CustomCommands = txtCommandLinePreview.Text;
         }
+
     }
 }
