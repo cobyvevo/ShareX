@@ -108,6 +108,8 @@
             this.lblVideoEncoder = new System.Windows.Forms.Label();
             this.lblAudioEncoder = new System.Windows.Forms.Label();
             this.lbAudioSourceList = new System.Windows.Forms.ListBox();
+            this.lblNVENCTune = new System.Windows.Forms.Label();
+            this.cbNVENCTune = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudx264CRF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudXvidQscale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbVorbis_qscale)).BeginInit();
@@ -476,6 +478,8 @@
             // tpNVENC
             // 
             this.tpNVENC.BackColor = System.Drawing.SystemColors.Window;
+            this.tpNVENC.Controls.Add(this.cbNVENCTune);
+            this.tpNVENC.Controls.Add(this.lblNVENCTune);
             this.tpNVENC.Controls.Add(this.lblNVENCBitrateK);
             this.tpNVENC.Controls.Add(this.cbNVENCPreset);
             this.tpNVENC.Controls.Add(this.lblNVENCPreset);
@@ -819,6 +823,19 @@
             this.lbAudioSourceList.SelectedIndexChanged += new System.EventHandler(this.lbAudioSourceList_SelectedIndexChanged);
             this.lbAudioSourceList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbAudioSourceList_KeyDown);
             // 
+            // lblNVENCTune
+            // 
+            resources.ApplyResources(this.lblNVENCTune, "lblNVENCTune");
+            this.lblNVENCTune.Name = "lblNVENCTune";
+            // 
+            // cbNVENCTune
+            // 
+            this.cbNVENCTune.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbNVENCTune.FormattingEnabled = true;
+            resources.ApplyResources(this.cbNVENCTune, "cbNVENCTune");
+            this.cbNVENCTune.Name = "cbNVENCTune";
+            this.cbNVENCTune.SelectedIndexChanged += new System.EventHandler(this.cbNVENCTune_SelectedIndexChanged);
+            // 
             // FFmpegOptionsForm
             // 
             resources.ApplyResources(this, "$this");
@@ -975,5 +992,7 @@
         private System.Windows.Forms.Label lblAMFBitrate;
         private System.Windows.Forms.ListBox lbAudioSourceList;
         private System.Windows.Forms.Button btnRemoveAudioSource;
+        private System.Windows.Forms.ComboBox cbNVENCTune;
+        private System.Windows.Forms.Label lblNVENCTune;
     }
 }
