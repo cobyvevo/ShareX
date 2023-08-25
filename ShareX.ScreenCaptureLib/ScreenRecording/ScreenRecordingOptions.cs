@@ -97,6 +97,7 @@ namespace ShareX.ScreenCaptureLib
 
             if (IsRecording)
             {
+
                 if (FFmpeg.IsVideoSourceSelected)
                 {
                     if (FFmpeg.VideoSource.Equals(FFmpegCaptureDevice.GDIGrab.Value, StringComparison.OrdinalIgnoreCase))
@@ -119,7 +120,8 @@ namespace ShareX.ScreenCaptureLib
                         if (FFmpeg.IsAudioSourceSelected)
                         {
                             AppendInputDevice(args, "dshow", true);
-                            args.Append($"-i audio={Helpers.EscapeCLIText(FFmpeg.AudioSource)} ");
+                            args.Append($"-i audio={Helpers.EscapeCLIText(FFmpeg.AudioSources[0])} ");
+                            AppendExtraAudioDevices(args, "dshow");
                         }
                     }
                     else if (FFmpeg.VideoSource.Equals(FFmpegCaptureDevice.DDAGrab.Value, StringComparison.OrdinalIgnoreCase))
@@ -171,7 +173,8 @@ namespace ShareX.ScreenCaptureLib
                         if (FFmpeg.IsAudioSourceSelected)
                         {
                             AppendInputDevice(args, "dshow", true);
-                            args.Append($"-i audio={Helpers.EscapeCLIText(FFmpeg.AudioSource)} ");
+                            args.Append($"-i audio={Helpers.EscapeCLIText(FFmpeg.AudioSources[0])} ");
+                            AppendExtraAudioDevices(args, "dshow");
                         }
                     }
                     else
@@ -183,7 +186,8 @@ namespace ShareX.ScreenCaptureLib
 
                         if (FFmpeg.IsAudioSourceSelected)
                         {
-                            args.Append($":audio={Helpers.EscapeCLIText(FFmpeg.AudioSource)} ");
+                            args.Append($":audio={Helpers.EscapeCLIText(FFmpeg.AudioSources[0])} ");
+                            AppendExtraAudioDevices(args, "dshow");
                         }
                         else
                         {
@@ -194,7 +198,8 @@ namespace ShareX.ScreenCaptureLib
                 else if (FFmpeg.IsAudioSourceSelected)
                 {
                     AppendInputDevice(args, "dshow", true);
-                    args.Append($"-i audio={Helpers.EscapeCLIText(FFmpeg.AudioSource)} ");
+                    args.Append($"-i audio={Helpers.EscapeCLIText(FFmpeg.AudioSources[0])} ");
+                    AppendExtraAudioDevices(args, "dshow");
                 }
             }
             else
@@ -327,6 +332,22 @@ namespace ShareX.ScreenCaptureLib
             args.Append($"\"{output}\"");
 
             return args.ToString();
+        }
+
+        private void AppendExtraAudioDevices(StringBuilder args, string inputDevice)
+        {
+            if (FFmpeg.AudioSources.Count <= 1) return; // Guard cause for not bothering adding extra audio sources if there are no extra audio sources to add
+
+            for (int i = 1; i < FFmpeg.AudioSources.Count; i++) // The zeroth audio source is assumed already added along with the video source argument, so its skipped.
+            {
+                string source = FFmpeg.AudioSources[i];
+                args.Append($"-f {inputDevice} ");
+                args.Append("-thread_queue_size 1024 ");
+                args.Append("-audio_buffer_size 80 ");
+                args.Append($"-i audio={Helpers.EscapeCLIText(source)} ");
+            }
+
+            args.Append($"-filter_complex amix=inputs={FFmpeg.AudioSources.Count}:duration=longest "); // https://ffmpeg.org/ffmpeg-filters.html#amix
         }
 
         private void AppendInputDevice(StringBuilder args, string inputDevice, bool audioSource)

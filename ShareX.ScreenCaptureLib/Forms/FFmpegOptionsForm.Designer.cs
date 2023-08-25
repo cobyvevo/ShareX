@@ -43,6 +43,8 @@
             this.pbx264PresetWarning = new System.Windows.Forms.PictureBox();
             this.tbOpusBitrate = new System.Windows.Forms.TrackBar();
             this.nudGIFBayerScale = new System.Windows.Forms.NumericUpDown();
+            this.cbAudioSource = new System.Windows.Forms.ComboBox();
+            this.btnRemoveAudioSource = new System.Windows.Forms.Button();
             this.cbVideoCodec = new System.Windows.Forms.ComboBox();
             this.lblx264Preset = new System.Windows.Forms.Label();
             this.lblXvidQscale = new System.Windows.Forms.Label();
@@ -95,7 +97,6 @@
             this.lblMP3Quality = new System.Windows.Forms.Label();
             this.cbVideoSource = new System.Windows.Forms.ComboBox();
             this.lblVideoSource = new System.Windows.Forms.Label();
-            this.cbAudioSource = new System.Windows.Forms.ComboBox();
             this.lblAudioSource = new System.Windows.Forms.Label();
             this.cbAudioCodec = new System.Windows.Forms.ComboBox();
             this.btnHelperDevicesHelp = new System.Windows.Forms.Button();
@@ -106,6 +107,7 @@
             this.cbUseCustomFFmpegPath = new System.Windows.Forms.CheckBox();
             this.lblVideoEncoder = new System.Windows.Forms.Label();
             this.lblAudioEncoder = new System.Windows.Forms.Label();
+            this.lbAudioSourceList = new System.Windows.Forms.ListBox();
             this.lblNVENCTune = new System.Windows.Forms.Label();
             this.cbNVENCTune = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudx264CRF)).BeginInit();
@@ -286,6 +288,25 @@
             0,
             0});
             this.nudGIFBayerScale.ValueChanged += new System.EventHandler(this.nudGIFBayerScale_SelectedIndexChanged);
+            // 
+            // cbAudioSource
+            // 
+            this.cbAudioSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAudioSource.FormattingEnabled = true;
+            resources.ApplyResources(this.cbAudioSource, "cbAudioSource");
+            this.cbAudioSource.Name = "cbAudioSource";
+            this.ttHelpTip.SetToolTip(this.cbAudioSource, resources.GetString("cbAudioSource.ToolTip"));
+            this.cbAudioSource.SelectedIndexChanged += new System.EventHandler(this.cbAudioSource_SelectedIndexChanged);
+            // 
+            // btnRemoveAudioSource
+            // 
+            this.btnRemoveAudioSource.BackgroundImage = global::ShareX.ScreenCaptureLib.Properties.Resources.cross;
+            resources.ApplyResources(this.btnRemoveAudioSource, "btnRemoveAudioSource");
+            this.btnRemoveAudioSource.FlatAppearance.BorderSize = 0;
+            this.btnRemoveAudioSource.Name = "btnRemoveAudioSource";
+            this.ttHelpTip.SetToolTip(this.btnRemoveAudioSource, resources.GetString("btnRemoveAudioSource.ToolTip"));
+            this.btnRemoveAudioSource.UseVisualStyleBackColor = true;
+            this.btnRemoveAudioSource.Click += new System.EventHandler(this.btnRemoveAudioSource_Click);
             // 
             // cbVideoCodec
             // 
@@ -733,14 +754,6 @@
             resources.ApplyResources(this.lblVideoSource, "lblVideoSource");
             this.lblVideoSource.Name = "lblVideoSource";
             // 
-            // cbAudioSource
-            // 
-            this.cbAudioSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAudioSource.FormattingEnabled = true;
-            resources.ApplyResources(this.cbAudioSource, "cbAudioSource");
-            this.cbAudioSource.Name = "cbAudioSource";
-            this.cbAudioSource.SelectedIndexChanged += new System.EventHandler(this.cbAudioSource_SelectedIndexChanged);
-            // 
             // lblAudioSource
             // 
             resources.ApplyResources(this.lblAudioSource, "lblAudioSource");
@@ -800,6 +813,16 @@
             resources.ApplyResources(this.lblAudioEncoder, "lblAudioEncoder");
             this.lblAudioEncoder.Name = "lblAudioEncoder";
             // 
+            // lbAudioSourceList
+            // 
+            this.lbAudioSourceList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.lbAudioSourceList.FormattingEnabled = true;
+            resources.ApplyResources(this.lbAudioSourceList, "lbAudioSourceList");
+            this.lbAudioSourceList.Name = "lbAudioSourceList";
+            this.lbAudioSourceList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbAudioSourceList_DrawItem);
+            this.lbAudioSourceList.SelectedIndexChanged += new System.EventHandler(this.lbAudioSourceList_SelectedIndexChanged);
+            this.lbAudioSourceList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbAudioSourceList_KeyDown);
+            // 
             // lblNVENCTune
             // 
             resources.ApplyResources(this.lblNVENCTune, "lblNVENCTune");
@@ -818,10 +841,18 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.Controls.Add(this.tcFFmpegAudioCodecs);
-            this.Controls.Add(this.tcFFmpegVideoCodecs);
+            this.Controls.Add(this.btnRemoveAudioSource);
+            this.Controls.Add(this.lbAudioSourceList);
+            this.Controls.Add(this.lblVideoSource);
+            this.Controls.Add(this.cbVideoCodec);
             this.Controls.Add(this.lblAudioEncoder);
+            this.Controls.Add(this.lblAudioSource);
+            this.Controls.Add(this.tcFFmpegVideoCodecs);
             this.Controls.Add(this.lblVideoEncoder);
+            this.Controls.Add(this.cbAudioSource);
+            this.Controls.Add(this.cbVideoSource);
+            this.Controls.Add(this.tcFFmpegAudioCodecs);
+            this.Controls.Add(this.cbAudioCodec);
             this.Controls.Add(this.cbUseCustomFFmpegPath);
             this.Controls.Add(this.cbCustomCommands);
             this.Controls.Add(this.lblCommandLinePreview);
@@ -829,16 +860,10 @@
             this.Controls.Add(this.txtUserArgs);
             this.Controls.Add(this.lblCommandLineArgs);
             this.Controls.Add(this.btnHelperDevicesHelp);
-            this.Controls.Add(this.cbAudioCodec);
             this.Controls.Add(this.lblHelperDevices);
-            this.Controls.Add(this.cbVideoCodec);
             this.Controls.Add(this.btnInstallHelperDevices);
-            this.Controls.Add(this.cbVideoSource);
             this.Controls.Add(this.btnFFmpegBrowse);
-            this.Controls.Add(this.lblVideoSource);
-            this.Controls.Add(this.cbAudioSource);
             this.Controls.Add(this.txtFFmpegPath);
-            this.Controls.Add(this.lblAudioSource);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -965,6 +990,8 @@
         private System.Windows.Forms.Label lblAMFBitrateK;
         private System.Windows.Forms.NumericUpDown nudAMFBitrate;
         private System.Windows.Forms.Label lblAMFBitrate;
+        private System.Windows.Forms.ListBox lbAudioSourceList;
+        private System.Windows.Forms.Button btnRemoveAudioSource;
         private System.Windows.Forms.ComboBox cbNVENCTune;
         private System.Windows.Forms.Label lblNVENCTune;
     }
