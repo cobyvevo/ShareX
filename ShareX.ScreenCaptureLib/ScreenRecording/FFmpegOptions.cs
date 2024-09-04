@@ -2,7 +2,7 @@
 
 /*
     ShareX - A program that allows you to take screenshots and share any file type
-    Copyright (c) 2007-2023 ShareX Team
+    Copyright (c) 2007-2024 ShareX Team
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 #endregion License Information (GPL v3)
 
 using ShareX.HelpersLib;
-using System.Collections.Generic;
+using System;
 
 namespace ShareX.ScreenCaptureLib
 {
@@ -46,24 +46,24 @@ namespace ShareX.ScreenCaptureLib
         public FFmpegPreset x264_Preset { get; set; } = FFmpegPreset.ultrafast;
         public int x264_CRF { get; set; } = 28;
         public bool x264_Use_Bitrate { get; set; } = false;
-        public int x264_Bitrate { get; set; } = 3000; // kbit/s
-        public int VPx_Bitrate { get; set; } = 3000; // kbit/s
+        public int x264_Bitrate { get; set; } = 3000; // kbps
+        public int VPx_Bitrate { get; set; } = 3000; // kbps
         public int XviD_QScale { get; set; } = 10;
         public FFmpegNVENCPreset NVENC_Preset { get; set; } = FFmpegNVENCPreset.p4;
         public FFmpegNVENCTune NVENC_Tune { get; set; } = FFmpegNVENCTune.ll;
-        public int NVENC_Bitrate { get; set; } = 3000; // kbit/s
+        public int NVENC_Bitrate { get; set; } = 3000; // kbps
         public FFmpegPaletteGenStatsMode GIFStatsMode { get; set; } = FFmpegPaletteGenStatsMode.full;
         public FFmpegPaletteUseDither GIFDither { get; set; } = FFmpegPaletteUseDither.sierra2_4a;
         public int GIFBayerScale { get; set; } = 2;
         public FFmpegAMFUsage AMF_Usage { get; set; } = FFmpegAMFUsage.lowlatency;
         public FFmpegAMFQuality AMF_Quality { get; set; } = FFmpegAMFQuality.speed;
-        public int AMF_Bitrate { get; set; } = 3000; // kbit/s
+        public int AMF_Bitrate { get; set; } = 3000; // kbps
         public FFmpegQSVPreset QSV_Preset { get; set; } = FFmpegQSVPreset.fast;
-        public int QSV_Bitrate { get; set; } = 3000; // kbit/s
+        public int QSV_Bitrate { get; set; } = 3000; // kbps
 
         // Audio
-        public int AAC_Bitrate { get; set; } = 128; // kbit/s
-        public int Opus_Bitrate { get; set; } = 128; // kbit/s
+        public int AAC_Bitrate { get; set; } = 128; // kbps
+        public int Opus_Bitrate { get; set; } = 128; // kbps
         public int Vorbis_QScale { get; set; } = 3;
         public int MP3_QScale { get; set; } = 4;
 
@@ -138,5 +138,23 @@ namespace ShareX.ScreenCaptureLib
         public bool IsAnimatedImage => VideoCodec == FFmpegVideoCodec.gif || VideoCodec == FFmpegVideoCodec.libwebp || VideoCodec == FFmpegVideoCodec.apng;
 
         public bool IsEvenSizeRequired => !IsAnimatedImage;
+
+        // TEMP: For backward compatibility
+        public void FixSources()
+        {
+            if (VideoSource.Equals("None", StringComparison.OrdinalIgnoreCase))
+            {
+                VideoSource = FFmpegCaptureDevice.None.Value;
+            }
+            else if (VideoSource.Equals("GDI grab", StringComparison.OrdinalIgnoreCase))
+            {
+                VideoSource = FFmpegCaptureDevice.GDIGrab.Value;
+            }
+
+            if (AudioSource.Equals("None", StringComparison.OrdinalIgnoreCase))
+            {
+                AudioSource = FFmpegCaptureDevice.None.Value;
+            }
+        }
     }
 }

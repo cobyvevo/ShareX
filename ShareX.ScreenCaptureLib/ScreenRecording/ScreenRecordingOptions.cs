@@ -2,7 +2,7 @@
 
 /*
     ShareX - A program that allows you to take screenshots and share any file type
-    Copyright (c) 2007-2023 ShareX Team
+    Copyright (c) 2007-2024 ShareX Team
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -91,7 +91,6 @@ namespace ShareX.ScreenCaptureLib
             }
 
             StringBuilder args = new StringBuilder();
-            args.Append("-hide_banner "); // All FFmpeg tools will normally show a copyright notice, build options and library versions. This option can be used to suppress printing this information.
 
             string framerate = isCustom ? "$fps$" : FPS.ToString();
 
@@ -102,6 +101,12 @@ namespace ShareX.ScreenCaptureLib
                 {
                     if (FFmpeg.VideoSource.Equals(FFmpegCaptureDevice.GDIGrab.Value, StringComparison.OrdinalIgnoreCase))
                     {
+                        if (FFmpeg.IsAudioSourceSelected)
+                        {
+                            AppendInputDevice(args, "dshow", true);
+                            args.Append($"-i audio={Helpers.EscapeCLIText(FFmpeg.AudioSource)} ");
+                        }
+
                         string x = isCustom ? "$area_x$" : CaptureArea.X.ToString();
                         string y = isCustom ? "$area_y$" : CaptureArea.Y.ToString();
                         string width = isCustom ? "$area_width$" : CaptureArea.Width.ToString();
@@ -116,16 +121,16 @@ namespace ShareX.ScreenCaptureLib
                         args.Append($"-video_size {width}x{height} ");
                         args.Append($"-draw_mouse {cursor} ");
                         args.Append("-i desktop ");
-
+                    }
+                    else if (FFmpeg.VideoSource.Equals(FFmpegCaptureDevice.DDAGrab.Value, StringComparison.OrdinalIgnoreCase))
+                    {
                         if (FFmpeg.IsAudioSourceSelected)
                         {
                             AppendInputDevice(args, "dshow", true);
                             args.Append($"-i audio={Helpers.EscapeCLIText(FFmpeg.AudioSources[0])} ");
                             AppendExtraAudioDevices(args, "dshow");
                         }
-                    }
-                    else if (FFmpeg.VideoSource.Equals(FFmpegCaptureDevice.DDAGrab.Value, StringComparison.OrdinalIgnoreCase))
-                    {
+
                         Screen[] screens = Screen.AllScreens.OrderBy(x => !x.Primary).ToArray();
                         int monitorIndex = 0;
                         Rectangle captureArea = screens[0].Bounds;
